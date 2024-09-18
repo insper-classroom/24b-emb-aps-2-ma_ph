@@ -1,40 +1,15 @@
-# HC-05 Exemplo
+# Simulação de Taco de Golfe com IMU e Potenciômetro Linear
 
-Manual: [https://www.olimex.com/Products/Components/RF/BLUETOOTH-SERIAL-hc-05/resources/hc05.pdf](https://s3-sa-east-1.amazonaws.com/robocore-lojavirtual/709/HC-05_ATCommandSet.pdf)
+Este projeto visa desenvolver um protótipo de simulação de um taco de golfe, utilizando uma Unidade de Medição Inercial (IMU), um potenciômetro linear e um atuador de vibração (vibra cal). O protótipo capta o movimento do taco e simula o impacto da bola, fornecendo uma experiência imersiva ao jogador.
 
-Conectar HC-05 no 5V e gnd, pino TX no `GP5` e pino RX no `GP4`. Também é necessário conectar o pino `STATE` do bluetooth no pino `GP3`.
+# Sobre o controle:
 
-O projeto está organizado da seguinte maneira:
+O controle do jogo será feito principalmente através da IMU e de um potenciômetro linear, permitindo que possamos determinar a posição e a força da tacada com esse novo dispositivo físico. Ao puxar o potenciômetro, será possível perceber a intensidade, variando entre 0 e 100%, o que indicará o quão forte será a tacada. Além disso, a medição inercial possibilitará a formação de novos ângulos, o que, combinado com a força proporcionada pela extensão do potenciômetro, determinará a direção da bola, ajudando-a a alcançar o buraco.
 
-- `hc05.h`: Arquivo de headfile com configurações do hc05, tais como pinos e uart.
-- `hc05.c`: Arquivo `.c` com implementação das funções auxiliares para configurar o módulo bluetooth:
-    - `bool hc05_check_connection();`
-    - `bool hc05_set_name(char name[]);`
-    - `bool hc05_set_pin(char pin[]);`
-    - `bool hc05_set_at_mode(int on);`
-    - `bool hc05_init(char name[], char pin[]);`
+Além do controle através da IMU e do potenciômetro, haverá também um botão adicional que servirá para realizar ações como passar de fase, pausar o jogo, retornar à fase anterior, entre outras. Embora o controle principal seja guiado pela IMU, este botão permitirá maior versatilidade na navegação do jogo.
 
-- `main.c` Arquivo principal com inicialização do módulo bluetooth.
+O principal objetivo é desenvolver um objeto físico funcional e integrado – sem dependência externa – que aprimore a jogabilidade e torne a experiência mais próxima da realidade.
 
-```c
-void hc05_task(void *p) {
-    uart_init(hc05_UART_ID, hc05_BAUD_RATE);
-    gpio_set_function(hc05_TX_PIN, GPIO_FUNC_UART);
-    gpio_set_function(hc05_RX_PIN, GPIO_FUNC_UART);
-    hc05_init("aps2_legal", "1234");
+# Sobre o jogo:
 
-    while (true) {
-        uart_puts(hc05_UART_ID, "OLAAA ");
-        vTaskDelay(pdMS_TO_TICKS(100));
-    }
-}
-```
-
-Extra ao que foi feito em sala de aula, eu adicionei o `hc05_set_at_mode` que força o módulo bluetooth entrar em modo `AT`, caso contrário ele fica 
-conectado no equipamento e não recebe mais comandos.
-
-## No Linux
-
-Para conectar o bluetooth no linux, usar os passos descritos no site:
-
-- https://marcqueiroz.wordpress.com/aventuras-com-arduino/configurando-hc-06-bluetooth-module-device-no-ubuntu-12-04/
+O jogo "MiniGolf Master" possui uma interface organizada em diferentes níveis de dificuldade (fácil, médio e difícil), cada um com uma quantidade distinta de fases. Cada fase apresenta uma disposição visual diferente durante o lance da bola, o que proporciona uma jogabilidade variada e oferece diversas opções para aplicar diferentes técnicas ao jogo. Para avançar de fase, o jogador deve fazer com que a bola chegue ao buraco; quanto menor o número de tacadas, maior a pontuação. A pontuação varia de 0 a 3 estrelas no final de cada fase, de acordo com o desempenho do jogador.
