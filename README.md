@@ -13,3 +13,5 @@ O principal objetivo é desenvolver um objeto físico funcional e integrado – 
 # Sobre o jogo:
 
 O jogo "MiniGolf Master" possui uma interface organizada em diferentes níveis de dificuldade (fácil, médio e difícil), cada um com uma quantidade distinta de fases. Cada fase apresenta uma disposição visual diferente durante o lance da bola, o que proporciona uma jogabilidade variada e oferece diversas opções para aplicar diferentes técnicas ao jogo. Para avançar de fase, o jogador deve fazer com que a bola chegue ao buraco; quanto menor o número de tacadas, maior a pontuação. A pontuação varia de 0 a 3 estrelas no final de cada fase, de acordo com o desempenho do jogador.
+![image](https://github.com/user-attachments/assets/0473a213-40af-4877-84a4-77321fd310be)
+![Imagem do WhatsApp de 2024-09-25 à(s) 16 36 27_6a49ee75](https://github.com/user-attachments/assets/8a2d47c7-a680-49d2-be2d-aec5cfcb29d0)
